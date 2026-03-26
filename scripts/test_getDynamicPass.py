@@ -12,6 +12,7 @@ class Test_GetDynamicPass:
     headers = {
         "Content-Type": "application/json",
         "skipSign": "hyzh123456",
+        "x-gray": "1"
     }
     
     # 创建OCR客户端实例，用于识别图形验证码
