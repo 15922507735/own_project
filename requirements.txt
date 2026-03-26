@@ -1,0 +1,11 @@
+playwright
+pytest
+pytest-html
+allure-pytest
+requests
+selenium
+beautifulsoup4
+pandas
+matplotlib
+numpy
+jinja2
