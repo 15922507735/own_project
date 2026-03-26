@@ -157,3 +157,4 @@ class Test_Faxian_Page:
 
 
 if __name__ == '__main__':
+    pytest.main(['-s', 'test_faxian_zixun.py'])

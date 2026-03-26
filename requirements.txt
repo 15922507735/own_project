@@ -9,3 +9,5 @@ pandas
 matplotlib
 numpy
 jinja2
+ddddocr
+onnxruntime==1.16.3
