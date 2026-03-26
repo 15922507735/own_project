@@ -13,7 +13,7 @@ class Test_My_Page:
         url = f"{BASE_URL}/user/v2/getInfo"
         test_data = {
         }
-        responses = requests.get(url=url, headers=self.headers_data, json=test_data)
+        responses = requests.post(url=url, headers=self.headers_data, json=test_data)
         data = responses.json()
         print(data)
         assert data.get("msg") == "操作成功"
