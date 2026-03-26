@@ -6,19 +6,19 @@ from page import get_headers_with_token, BASE_URL
 pinglun_test_data = [
     {
         "commentId": 0,
-        "imgs": "",
+        "imgs": "你好",
         "qzNotesId": 29802,
         "type": 0
     },
     {
         "commentId": 0,
-        "imgs": "",
+        "imgs": "不好",
         "qzNotesId": 29802,
         "type": 0
     },
     {
         "commentId": 0,
-        "imgs": "",
+        "imgs": "很好",
         "qzNotesId": 29802,
         "type": 0
     }

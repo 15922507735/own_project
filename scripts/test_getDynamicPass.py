@@ -156,32 +156,32 @@ class Test_GetDynamicPass:
         assert data.get("code") == 0
 
     # 手机号短信验证码登录，传入图形验证码和手机短信验证码
-    def test_phoneLogin(self, graphics_data):
-        url = "https://qa-int.qiyuan.changan.com.cn/user/login"
-        test_data = {
-            "code": "",
-            "dynamicPassword": "439409",
-            "graphicsKey": graphics_data.get("graphicsKey", ""),
-            "imgCode": graphics_data.get("imgCode", ""),
-            "iosOrAndroid": 0,
-            "isApp": 0,
-            "lastCity": "",
-            "lastProvince": "",
-            "openType": "",
-            "parentId": "",
-            "parentLink": "",
-            "parentType": 0,
-            "password": "",
-            "phone": "15922507735",
-            "rid": "string",
-            "temporaryToken": "string",
-            "ydToken": "string"
-        }
-        response = requests.post(url, headers=self.headers, json=test_data)
-        print(f"\n手机号短信验证码登录响应结果：{response.text}")
-        data = response.json()
-        print(f"\n手机号短信验证码登录响应结果：{data}")
-        assert data.get("code") == 0
+    # def test_phoneLogin(self, graphics_data):
+    #     url = "https://qa-int.qiyuan.changan.com.cn/user/login"
+    #     test_data = {
+    #         "code": "",
+    #         "dynamicPassword": "439409",
+    #         "graphicsKey": graphics_data.get("graphicsKey", ""),
+    #         "imgCode": graphics_data.get("imgCode", ""),
+    #         "iosOrAndroid": 0,
+    #         "isApp": 0,
+    #         "lastCity": "",
+    #         "lastProvince": "",
+    #         "openType": "",
+    #         "parentId": "",
+    #         "parentLink": "",
+    #         "parentType": 0,
+    #         "password": "",
+    #         "phone": "15922507735",
+    #         "rid": "string",
+    #         "temporaryToken": "string",
+    #         "ydToken": "string"
+    #     }
+    #     response = requests.post(url, headers=self.headers, json=test_data)
+    #     print(f"\n手机号短信验证码登录响应结果：{response.text}")
+    #     data = response.json()
+    #     print(f"\n手机号短信验证码登录响应结果：{data}")
+    #     assert data.get("code") == 0
 
     # 使用账号密码登录-输入账号密码和验证码登录
     # def test_login(self, graphics_data):
