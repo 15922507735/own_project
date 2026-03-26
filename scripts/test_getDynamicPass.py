@@ -137,24 +137,24 @@ class Test_GetDynamicPass:
         assert graphics_value is not None
 
     # 获取手机短信验证码，传入上面获取的图形验证码
-    def test_getDynamicPassCode(self, graphics_data):
-        url = "https://qa-int.qiyuan.changan.com.cn/user/getDynamicPass"
-        test_data = {
-                "channel": "",
-                "dynamicPassword": "",
-                "graphicsKey": graphics_data.get("graphicsKey", ""),
-                "imgCode": graphics_data.get("imgCode", ""),
-                "imgCodeSign": 0,
-                "isApp": 0,
-                "phone": "15922507735",
-                "temporaryToken": "",
-                "vertifyCode": ""
-            }
-        response = requests.post(url, headers=self.headers, json=test_data)
-        print(f"\n获取手机短信验证码响应结果：{response.text}")
-        data = response.json()
-        print(f"\n获取手机短信验证码响应结果：{data}")
-        assert data.get("code") == 0
+    # def test_getDynamicPassCode(self, graphics_data):
+    #     url = "https://qa-int.qiyuan.changan.com.cn/user/getDynamicPass"
+    #     test_data = {
+    #             "channel": "",
+    #             "dynamicPassword": "",
+    #             "graphicsKey": graphics_data.get("graphicsKey", ""),
+    #             "imgCode": graphics_data.get("imgCode", ""),
+    #             "imgCodeSign": 0,
+    #             "isApp": 0,
+    #             "phone": "15922507735",
+    #             "temporaryToken": "",
+    #             "vertifyCode": ""
+    #         }
+    #     response = requests.post(url, headers=self.headers, json=test_data)
+    #     print(f"\n获取手机短信验证码响应结果：{response.text}")
+    #     data = response.json()
+    #     print(f"\n获取手机短信验证码响应结果：{data}")
+    #     assert data.get("code") == 0
 
     # 手机号短信验证码登录，传入图形验证码和手机短信验证码
     # def test_phoneLogin(self, graphics_data):

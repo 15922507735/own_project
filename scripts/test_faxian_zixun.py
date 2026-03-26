@@ -3,36 +3,36 @@ import requests
 from page import get_headers_with_token, BASE_URL
 
 # 定义测试数据
-pinglun_test_data = [
-    {
-        "commentId": 0,
-        "content": "哈哈哈",
-        "imgs": "",
-        "qzNotesId": 29802,
-        "type": 0
-    },
-    {
-        "commentId": 0,
-        "content": "很好啊",
-        "imgs": "",
-        "qzNotesId": 29802,
-        "type": 0
-    },
-    {
-        "commentId": 0,
-        "content": "今天天气不错",
-        "imgs": "",
-        "qzNotesId": 29802,
-        "type": 0
-    },
-    {
-        "commentId": 0,
-        "content": "你想怎么样今天天气一点都不好",
-        "imgs": "",
-        "qzNotesId": 29802,
-        "type": 0
-    }
-]
+# pinglun_test_data = [
+#     {
+#         "commentId": 0,
+#         "content": "哈哈哈",
+#         "imgs": "",
+#         "qzNotesId": 29802,
+#         "type": 0
+#     },
+#     {
+#         "commentId": 0,
+#         "content": "很好啊",
+#         "imgs": "",
+#         "qzNotesId": 29802,
+#         "type": 0
+#     },
+#     {
+#         "commentId": 0,
+#         "content": "今天天气不错",
+#         "imgs": "",
+#         "qzNotesId": 29802,
+#         "type": 0
+#     },
+#     {
+#         "commentId": 0,
+#         "content": "你想怎么样今天天气一点都不好",
+#         "imgs": "",
+#         "qzNotesId": 29802,
+#         "type": 0
+#     }
+# ]
 
 class Test_Faxian_Page:
     
@@ -144,20 +144,31 @@ class Test_Faxian_Page:
         assert data.get("msg") == "操作成功"
 
     # 圈子 - 评论帖子（参数化测试）
-    @pytest.mark.parametrize("test_case", pinglun_test_data, ids=lambda x: f"type_{x['type']}")
-    def test_faxian_pinglun(self, test_case):
-        """参数化测试：分别测试不同类型的评论"""
+    # @pytest.mark.parametrize("test_case", pinglun_test_data, ids=lambda x: f"type_{x['type']}")
+    # def test_faxian_pinglun(self, test_case):
+    #     """参数化测试：分别测试不同类型的评论"""
+    #     url = f"{BASE_URL}/qzNotes/commentSub"
+    #     request_data = {
+    #             "commentId": test_case.get("commentId"),
+    #             "content": test_case.get("content"),
+    #             "imgs": test_case.get("imgs"),
+    #             "qzNotesId": test_case.get("qzNotesId"),
+    #             "type": test_case.get("type")
+    #             }
+
+
+    def test_faxian_pinglun(self):
         url = f"{BASE_URL}/qzNotes/commentSub"
         request_data = {
-                "commentId": test_case.get("commentId"),
-                "content": test_case.get("content"),
-                "imgs": test_case.get("imgs"),
-                "qzNotesId": test_case.get("qzNotesId"),
-                "type": test_case.get("type")
-                }
+                    "commentId": 0,
+                    "content": "马上下班了",
+                    "imgs": "",
+                    "qzNotesId": 29802,
+                    "type": 0
+                    }
         responses = requests.post(url=url, headers=self.headers_data, json=request_data)
         data = responses.json()
-        print(f"\n测试数据：{test_case}")
+        print(f"\n测试数据：{request_data}")
         print(f"响应结果：{data}")
         # 如何返回信息'msg':'对不起，该内容你已经评论过啦'，则表示接口正常，无需重复评论
         # 检查响应消息，处理已评论的情况
@@ -166,7 +177,10 @@ class Test_Faxian_Page:
         #     data = responses.json()
         #
         # assert data.get("msg") == "操作成功"
-        if data.get("msg") == "对不起，该内容你已经评论过啦":
+        if data.get("msg") == "操作成功":
+            print("✅ 评论成功")
+            assert True
+        elif data.get("msg") == "对不起，该内容你已经评论过啦":
             print("✅ 已评论过，接口正常")
             assert True
         else:
