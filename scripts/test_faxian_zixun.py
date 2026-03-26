@@ -1,28 +1,23 @@
 import pytest
 import requests
-import time
-import random
 from page import get_headers_with_token, BASE_URL
 
 # 定义测试数据
 pinglun_test_data = [
     {
         "commentId": 0,
-        "content": "今天很开心",
         "imgs": "",
         "qzNotesId": 29802,
         "type": 0
     },
     {
         "commentId": 0,
-        "content": "来一个哈哈哈",
         "imgs": "",
         "qzNotesId": 29802,
         "type": 0
     },
     {
         "commentId": 0,
-        "content": "温度很高天气很热",
         "imgs": "",
         "qzNotesId": 29802,
         "type": 0
@@ -154,23 +149,11 @@ class Test_Faxian_Page:
         data = responses.json()
         print(f"\n测试数据：{test_case}")
         print(f"响应结果：{data}")
-        
-        # 如果响应结果包含对不起，则修改评论内容后再次提交
         if data.get("msg") == "对不起，该内容你已经评论过啦":
-            print("检测到已评论过，修改评论内容后重新提交...")
-            # 修改评论内容（添加时间戳和随机数）
-            original_content = test_case.get("content")
-            new_content = f"{original_content}_{int(time.time())}_{random.randint(1000, 9999)}"
-            request_data["content"] = new_content
-            print(f"新评论内容：{new_content}")
-            
-            # 重新提交评论
             responses = requests.post(url=url, headers=self.headers_data, json=request_data)
             data = responses.json()
-            print(f"重新提交响应结果：{data}")
 
         assert data.get("msg") == "操作成功"
 
 
 if __name__ == '__main__':
-    pytest.main(['-s', 'test_faxian_zixun.py'])

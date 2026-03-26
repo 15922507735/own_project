@@ -11,12 +11,9 @@ class Test_My_Page:
         self.headers_data = get_headers_with_token()
     # 获取用户信息
     def test_my_userinfo(self):
-        url = f"{BASE_URL}/user/v2/getInfo"
-        test_data = {}
         responses = requests.get(url=url, headers=self.headers_data, json=test_data)
         data = responses.json()
         print(data)
         assert data.get("msg") == "操作成功"
 
 if __name__ == '__main__':
-    pytest.main(['-s', 'Test_My_Page.py'])
