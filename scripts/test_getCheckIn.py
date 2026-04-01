@@ -27,6 +27,9 @@ class Test_CheckIn:
         elif msg == "今天您已签到":
             print("✅ 今天已经签到过，接口正常")
             assert True
+        elif msg == "非法访问":
+            print("❌ token 过期，请重新登录")
+            assert False, "token 过期，请重新登录"
         else:
             print(f"❌ 签到失败: {msg}")
             assert False, f"签到接口返回错误: {msg}"
