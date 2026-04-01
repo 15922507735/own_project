@@ -14,7 +14,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)) + '/../page')
-from test_logindata_driven import TestDataDriven
+from page.test_login_data_driven import Test_DataDriven
 
 
 class Test_GetDynamicPass:
@@ -27,7 +27,7 @@ class Test_GetDynamicPass:
     @pytest.fixture(scope="class")
     def test_data(self):
         """从Excel加载测试数据"""
-        data_loader = TestDataDriven()
+        data_loader = Test_DataDriven()
         test_data = data_loader.load_test_data()
         print(f"\n从Excel加载了 {len(test_data)} 条测试数据")
         return test_data
