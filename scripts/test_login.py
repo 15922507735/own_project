@@ -2,14 +2,11 @@ import base64
 import pytest
 import requests
 import ddddocr
-import io
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_v1_5
 from Crypto.Cipher import AES
-from Crypto.Util.Padding import pad, unpad
+from Crypto.Util.Padding import pad
 from Crypto.Random import get_random_bytes
-import hashlib
-import json
 import os
 import sys
 
@@ -25,7 +22,7 @@ class Test_GetDynamicPass:
     }
 
     @pytest.fixture(scope="class")
-    def test_data(self):
+    def test_data(self, test_data):
         """从Excel加载测试数据"""
         data_loader = Test_DataDriven()
         test_data = data_loader.load_test_data()
@@ -97,7 +94,7 @@ class Test_GetDynamicPass:
             return encrypted_base64
 
         except Exception as e:
-            # print(f"密码RSA加密失败: {e}")
+            print(f"密码RSA加密失败: {e}")
             # 如果RSA加密失败，使用Base64编码作为备选
             encoded = base64.b64encode(password.encode()).decode()
             # print(f"密码AES加密(Base64): {password} -> {encoded}")
@@ -130,7 +127,7 @@ class Test_GetDynamicPass:
             return encrypted_base64
             
         except Exception as e:
-            # print(f"密码AES加密失败: {e}")
+            print(f"密码AES加密失败: {e}")
             # 如果AES加密失败，使用Base64编码作为备选
             encoded = base64.b64encode(password.encode()).decode()
             # print(f"密码Base64编码: {password} -> {encoded}")
@@ -171,13 +168,13 @@ class Test_GetDynamicPass:
             "phone": phone
         }
     # 说明：使用OCR识别验证码登录测试
-    def test_getGraphicsCode(self, graphics_data):
+    def test_getgraphicscode(self, graphics_data):
         print(f"\n获取到的graphicsValue: {graphics_data['graphicsValue'][:50]}...")
         print(f"graphicsKey: {graphics_data['graphicsKey']}")
         print(f"OCR识别验证码: {graphics_data['imgCode']}")
         assert graphics_data is not None
 
-    def test_getDynamicPass(self, graphics_data):
+    def test_getdynamicpass(self, graphics_data):
         graphics_value = graphics_data["graphicsValue"]
 
         img_data = base64.b64decode(graphics_value)
